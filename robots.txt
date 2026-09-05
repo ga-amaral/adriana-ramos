@@ -1,0 +1,4 @@
+# TODO(cliente): substituir EXEMPLO-DOMINIO pelo domínio final antes de publicar.
+User-agent: *
+Allow: /
+Sitemap: https://www.EXEMPLO-DOMINIO.com.br/sitemap.xml

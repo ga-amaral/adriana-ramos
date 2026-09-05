@@ -1,0 +1,665 @@
+/* ============================================================
+   Adriana Ramos Advocacia — LP Horas Extras / Falso Cargo de Confiança
+   Direção visual Terra+Nebula: Neo-Corporate Trust / Clareza Protegida
+   PALETA V2 (seção 10.1.1 da nota): vinho + marfim + dourado + verde WA.
+   Stack: CSS vanilla, mobile-first. Contrastes validados WCAG AA.
+   ============================================================ */
+:root {
+  --color-wine-deep: #240a0b; /* hero, CTA final, rodapé e blocos de autoridade */
+  --color-wine-mid: #411617; /* realces, seções escuras, CTA institucional */
+  --color-wine-alt: #401617; /* variação de superfície/hover escuro */
+  --color-wine-glass: rgba(36, 10, 11, 0.75); /* glass do hero; blur 16px */
+  --color-bg: #fbf9f7; /* fundo claro principal */
+  --color-bg-alt: #f3ece7; /* seções alternadas */
+  --color-surface: #ffffff; /* cards e superfícies */
+  --color-ink: #1a0a0b; /* títulos e texto principal em fundo claro */
+  --color-text-secondary: #523b3c; /* texto secundário */
+  --color-text-muted: #786061; /* metadados (5.49:1 no bg — AA ok) */
+  --color-line: #e8dfd8; /* bordas e divisores claros */
+  --color-on-wine: #ffffff; /* texto sobre vinho */
+  --color-on-wine-soft: #f2eae9; /* apoio sobre vinho */
+  --color-gold: #d2a951; /* detalhes/ícones/foco; NUNCA texto pequeno (2.20:1 no branco) */
+  --color-wa-base: #3b631f; /* fundo CTA WhatsApp com texto branco (7.02:1 — AA ok) */
+  --color-wa-brand: #6aa442; /* ícone e detalhes WhatsApp */
+  --color-wa-hover: #5e9e32; /* NÃO usar com texto branco (3.27:1); hover via brightness */
+  --color-wa-active: #240a0b; /* active/foco de alta legibilidade */
+  --ease-snap: cubic-bezier(.16, 1, .3, 1); /* easing padrão do upgrade futurista §11.4 */
+  --radius-card: 16px;
+  --radius-cta: 12px;
+  --container: 1120px;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --shadow-card: 0 1px 2px rgba(36, 10, 11, 0.06), 0 8px 24px rgba(36, 10, 11, 0.07);
+  --space-section-m: 60px;
+  --space-section-d: 92px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  line-height: 1.65;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip; /* rede de segurança: nenhum componente pode vazar scroll horizontal */
+  overflow-wrap: break-word; /* palavra longa nunca estoura o container em 320px */
+}
+
+img, svg { display: block; max-width: 100%; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(1.6rem, 1.15rem + 2.5vw, 2.75rem); } /* 320px: ~26px, nao ~29px */
+h2 { font-size: clamp(1.4rem, 1.15rem + 1.4vw, 2rem); }
+h3 { font-size: 1.125rem; }
+
+p { margin: 0 0 1em; max-width: 68ch; }
+ul, ol { padding-left: 1.25rem; }
+li { margin-bottom: 0.5em; }
+li::marker { color: var(--color-wine-mid); }
+
+a { color: var(--color-wine-mid); text-underline-offset: 3px; }
+a:hover { color: var(--color-wine-deep); }
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.hero :focus-visible, .site-footer :focus-visible, .cta-final :focus-visible { outline-color: var(--color-gold); }
+
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  background: var(--color-wine-deep); color: var(--color-on-wine);
+  padding: 12px 18px; border-radius: 10px; text-decoration: none;
+  transition: top 0.18s var(--ease-snap);
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+.container {
+  width: 100%; max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4.5vw, 24px);
+}
+@media (min-width: 768px) { .container { padding-inline: 32px; } }
+@media (min-width: 1024px) { .container { padding-inline: 40px; } }
+
+.section { padding-block: clamp(44px, 7vw, var(--space-section-m)); }
+@media (min-width: 1024px) { .section { padding-block: var(--space-section-d); } }
+.section--alt { background: var(--color-bg-alt); }
+.section--navy { background: var(--color-wine-deep); color: var(--color-on-wine-soft); }
+.section__kicker {
+  display: inline-block; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--color-wine-mid); margin-bottom: 12px;
+}
+.section--navy .section__kicker { color: var(--color-gold); }
+.section__lead { color: var(--color-text-secondary); font-size: 1.075rem; max-width: 66ch; }
+.section--navy .section__lead { color: var(--color-on-wine-soft); }
+.disclaimer {
+  border-left: 3px solid var(--color-gold);
+  background: rgba(210, 169, 81, 0.12);
+  padding: 12px 16px; border-radius: 0 10px 10px 0;
+  color: var(--color-text-secondary); font-size: 0.95rem; max-width: 70ch;
+}
+.section--navy .disclaimer { color: var(--color-on-wine-soft); background: rgba(210,169,81,0.1); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(251, 249, 247, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-line);
+}
+.site-header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding-block: 12px;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--color-ink); min-width: 0; }
+.brand__mark {
+  border-radius: 12px; flex: none;
+  background: var(--color-wine-deep);
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 10px;
+  border: 1px solid rgba(210, 169, 81, 0.5);
+}
+.brand__mark img { height: 26px; width: auto; max-width: 100%; display: block; }
+.brand__name { font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; line-height: 1.2; min-width: 0; }
+.brand__sub { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.75rem; color: var(--color-text-muted); }
+ /* Especificidade elevada de propósito: .btn{display:inline-flex} vem depois
+    neste arquivo e, com a mesma especificidade (0,1,0), vencia o display:none.
+    O CTA reaparecia no mobile, espremia a marca (quebrava "Advoca/cia") e
+    inflava o header sticky para 157px em 320px. No mobile o mesmo CTA já está
+    na barra .sticky-cta fixa no rodapé, então não se perde conversão. */
+.site-header .site-header__cta { display: none; }
+@media (min-width: 768px) { .site-header .site-header__cta { display: inline-flex; } }
+
+/* ---------- Buttons / CTAs ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 13px 22px;
+  border-radius: var(--radius-cta);
+  font-family: var(--font-body); font-weight: 600; font-size: 1rem; line-height: 1.3;
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  max-width: 100%; /* inline-flex com label longo nao pode estourar a linha */
+  transition: transform 0.2s var(--ease-snap), background-color 0.2s var(--ease-snap), border-color 0.2s var(--ease-snap), box-shadow 0.2s var(--ease-snap);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn--primary { background: var(--color-wine-mid); color: var(--color-on-wine); box-shadow: 0 6px 18px rgba(65, 22, 23, 0.28); }
+.btn--primary:hover { background: var(--color-wine-deep); color: #fff; }
+.btn--hero { background: var(--color-on-wine); color: var(--color-wine-deep); font-size: 1.05rem; padding: 15px 26px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+.btn--hero:hover { background: var(--color-on-wine-soft); color: var(--color-wine-deep); }
+.btn--outline { background: transparent; border-color: var(--color-wine-mid); color: var(--color-wine-mid); }
+.btn--outline:hover { background: rgba(65, 22, 23, 0.08); color: var(--color-wine-deep); border-color: var(--color-wine-deep); }
+.btn--outline-light { border-color: rgba(255, 255, 255, 0.7); color: var(--color-on-wine); }
+.btn--outline-light:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+/* WhatsApp: base #3B631F + texto branco (7.02:1). Hover escurece via brightness
+   (wa-hover #5E9E32 com branco dá só 3.27:1 — fora da AA), + elevação/sombra. */
+.btn--wa { background: var(--color-wa-base); color: #fff; box-shadow: 0 6px 18px rgba(59, 99, 31, 0.35); }
+.btn--wa:hover { background: var(--color-wa-base); filter: brightness(0.88); color: #fff; }
+/* ---------- 11.4 Microinterações: shimmer (1 varredura por hover) + press ----------
+   BUG CORRIGIDO (mancha borrada no canto do card da seção 11): o ::after do
+   shimmer fica estacionado em translateX(-110%), ou seja, PERMANENTEMENTE ao
+   lado esquerdo do botão. Sem clipping ele era pintado o tempo todo — no CTA
+   final isso caía por cima da borda esquerda do card e lia como um blob
+   flutuante sem dono (a silhueta arredondada vinha do border-radius:inherit).
+   O overflow:hidden tinha sido removido por acreditar que cortaria o anel de
+   foco. Não corta: o `overflow` de um elemento clipa o conteúdo e os
+   descendentes dele, nunca o próprio outline, que é pintado pelo elemento fora
+   da border-box. Quem cortava o foco era o overflow:hidden do ANCESTRAL
+   .cta-final (já removido). Verificado no navegador: com overflow:hidden aqui
+   o anel dourado renderiza inteiro nos três botões.
+   Único cuidado: nenhum destes botões pode ganhar um descendente focável —
+   aí sim o anel DELE seria clipado. Hoje contêm apenas <svg> + texto. */
+.btn--primary, .btn--hero, .btn--wa {
+  position: relative; isolation: isolate;
+  overflow: hidden; /* confina o shimmer ao botão; NÃO afeta o outline de foco */
+}
+.btn--primary::after, .btn--hero::after, .btn--wa::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.16) 50%, transparent 58%);
+  transform: translateX(-110%);
+  transition: transform 0.9s var(--ease-snap);
+}
+/* Cinto de segurança: em ponteiro sem hover real (touch) a varredura nunca
+   dispara, então o overlay não precisa nem existir. */
+@media (hover: none) {
+  .btn--primary::after, .btn--hero::after, .btn--wa::after { display: none; }
+}
+.btn--primary:hover::after, .btn--hero:hover::after, .btn--wa:hover::after { transform: translateX(110%); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.wa-float:active { transform: scale(0.98); }
+.btn--block { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn__icon { flex: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; overflow: clip;
+  background: var(--color-wine-deep); color: var(--color-on-wine-soft);
+  padding-block: clamp(40px, 9vw, 56px) clamp(34px, 8vw, 48px);
+}
+/* 11.1 Hero high-tech: 3 halos estáticos (sem animação contínua) + precision
+   grid 48px com máscara radial. Camadas 100% decorativas (pointer-events). */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(420px 300px at 30% 12%, rgba(210, 169, 81, 0.12), transparent 70%),
+    radial-gradient(640px 460px at 85% 110%, rgba(100, 20, 25, 0.25), transparent 70%),
+    radial-gradient(700px 520px at 80% -10%, rgba(65, 22, 23, 0.45), transparent 70%);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.9;
+  background-image: linear-gradient(to right, rgba(210, 169, 81, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(210, 169, 81, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 80%);
+}
+.hero-deco {
+  position: absolute; top: 0; right: 0; z-index: 0;
+  width: min(420px, 38%); height: auto; pointer-events: none;
+}
+@media (max-width: 1023px) { .hero-deco { display: none; } } /* sem ruído no mobile/tablet */
+@media (max-width: 767px) { .hero::after { opacity: 0.35; } }
+.hero__grid { position: relative; z-index: 1; display: grid; gap: 32px; }
+@media (min-width: 1024px) {
+  .hero { padding-block: 88px 80px; }
+  .hero__grid { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); gap: 48px; align-items: center; }
+}
+.hero__title { color: #fff; max-width: 20ch; }
+.hero__title .hl { color: var(--color-gold); }
+.hero__sub { color: var(--color-on-wine-soft); font-size: 1.08rem; max-width: 58ch; }
+.hero__cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 20px; }
+.hero__note { font-size: 0.9rem; color: var(--color-on-wine-soft); margin-bottom: 0; }
+.trust-row { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.trust-row li { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--color-on-wine-soft); margin: 0; }
+.trust-row svg { flex: none; color: var(--color-gold); }
+.hero__panel {
+  background: var(--color-wine-glass);
+  border: 1px solid rgba(210, 169, 81, 0.2);
+  border-radius: 20px;
+  padding: clamp(20px, 5vw, 26px) clamp(18px, 5vw, 24px);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .hero__panel { background: var(--color-wine-mid); }
+}
+.hero__panel h2 { font-size: 1.1rem; color: #fff; margin-bottom: 14px; }
+.hero__panel ul { list-style: none; padding: 0; margin: 0 0 20px; }
+.hero__panel li { display: flex; gap: 10px; font-size: 0.95rem; color: var(--color-on-wine-soft); }
+.hero__panel li svg { flex: none; margin-top: 3px; color: var(--color-gold); }
+
+/* ---------- Hero com foto real (copy sobre vinho sólido; foto ao lado) ---------- */
+.hero-visual { position: relative; margin: 0; min-width: 0; }
+.hero-visual picture, .hero-visual img { display: block; }
+.hero-visual img {
+  width: 100%; height: auto; aspect-ratio: 16 / 10;
+  object-fit: cover; object-position: 58% 50%;
+  border-radius: 20px;
+  filter: saturate(.72) contrast(1.04);
+}
+.hero-visual::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(36, 10, 11, 0.10), rgba(36, 10, 11, 0.10) 30%, rgba(36, 10, 11, 0.58)),
+    linear-gradient(90deg, rgba(36, 10, 11, 0.72), rgba(36, 10, 11, 0.20) 55%, rgba(36, 10, 11, 0.42));
+}
+/* Painel sobre o terço inferior-direito da foto (vidro escuro + fallback sólido) */
+.hero-quick-panel {
+  position: absolute; right: 24px; bottom: 24px; z-index: 1;
+  max-width: 280px; margin: 0;
+  background: rgba(36, 10, 11, 0.82);
+  border: 1px solid rgba(210, 169, 81, 0.32);
+}
+@media (max-width: 767px) {
+  .hero-visual img { aspect-ratio: 4 / 3; object-position: 55% 42%; border-radius: 16px; }
+  .hero-visual::after {
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(36, 10, 11, 0.10), rgba(36, 10, 11, 0.10) 30%, rgba(36, 10, 11, 0.58));
+  }
+  /* Zerar inset em vez de confiar em position:static — .hud{position:relative}
+     vem depois no arquivo e reverteria o static, reativando o right/bottom:24px
+     da regra base e deslocando o painel para fora da tela (left:-8px em 320px). */
+  .hero-quick-panel {
+    position: relative; inset: auto;
+    max-width: none; margin-top: 16px;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .hero-quick-panel { background: var(--color-wine-mid); }
+}
+.hairline { height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold), transparent); opacity: 0.6; margin: 18px 0; border: 0; }
+
+/* ---------- 11.2 Assinatura visual — Golden Trust Conduit + HUD corners ----------
+   Linha vertical dourada marcando transições entre seções (só ≥768px; nunca o
+   único indicador de estrutura). HUD corners 6px via pseudo-elemento, só nos
+   cards-chave, sem afetar layout/fluxo (absolute + pointer-events:none). */
+@media (min-width: 768px) {
+  main > .section { position: relative; }
+  main > .section::before {
+    content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 36px; border-radius: 2px; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, rgba(210, 169, 81, 0.65), transparent);
+  }
+}
+.hud { position: relative; }
+.hud::before, .hud::after {
+  content: ""; position: absolute; width: 6px; height: 6px; z-index: 2; pointer-events: none;
+}
+.hud::before {
+  top: 8px; left: 8px;
+  border-top: 1.5px solid rgba(210, 169, 81, 0.85);
+  border-left: 1.5px solid rgba(210, 169, 81, 0.85);
+  border-top-left-radius: 2px;
+}
+.hud::after {
+  bottom: 8px; right: 8px;
+  border-bottom: 1.5px solid rgba(210, 169, 81, 0.85);
+  border-right: 1.5px solid rgba(210, 169, 81, 0.85);
+  border-bottom-right-radius: 2px;
+}
+
+/* ---------- Cards / grids ---------- */
+.grid { display: grid; gap: 16px; }
+@media (min-width: 768px) {
+  /* minmax(0,1fr): sem isso o minimo automatico da track e min-content e um
+     conteudo largo (palavra longa, botao) pode empurrar a coluna e gerar
+     scroll horizontal em vez de encolher. */
+  .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) { .grid { gap: 24px; } .grid--steps { grid-template-columns: repeat(4, 1fr); } }
+.card {
+  background: var(--color-surface); border: 1px solid var(--color-line);
+  border-radius: var(--radius-card); padding: 22px 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s var(--ease-snap), border-color 0.2s var(--ease-snap);
+}
+.card:hover {
+  transform: translateY(-3px); border-color: var(--color-gold);
+  box-shadow: var(--shadow-card), 0 14px 34px rgba(36, 10, 11, 0.12), 0 0 0 1px rgba(210, 169, 81, 0.45);
+}
+.card h3 { margin-bottom: 8px; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--color-text-secondary); font-size: 0.97rem; }
+.card--dark { background: var(--color-wine-mid); border-color: rgba(210,169,81,0.25); color: var(--color-on-wine-soft); }
+.card--dark p { color: var(--color-on-wine-soft); }
+.checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.checklist li {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--color-surface); border: 1px solid var(--color-line);
+  border-radius: 14px; padding: 14px 16px;
+}
+.checklist svg { flex: none; margin-top: 2px; color: var(--color-wine-mid); }
+.checklist strong { color: var(--color-ink); }
+.callout {
+  margin-top: 20px; background: var(--color-surface);
+  border: 1px solid var(--color-line); border-left: 4px solid var(--color-wine-mid);
+  border-radius: 12px; padding: 16px clamp(14px, 4vw, 18px);
+}
+.callout p { margin: 0; } /* substitui style="margin:0" inline no index.html */
+
+/* ---------- Steps ---------- */
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 8px 0 0; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .steps { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; } .steps--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } .steps--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.steps li {
+  position: relative; background: var(--color-surface);
+  border: 1px solid var(--color-line); border-radius: var(--radius-card);
+  padding: 20px 18px 18px; counter-increment: step;
+  min-width: 0; overflow-wrap: break-word;
+}
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-display); font-weight: 700; color: var(--color-wine-mid);
+  font-size: 1.35rem; display: block; margin-bottom: 8px;
+}
+.steps li::after {
+  content: ""; position: absolute; left: 18px; right: 18px; top: 0; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--color-wine-mid), var(--color-gold));
+  opacity: 0.85;
+}
+.steps strong { display: block; margin-bottom: 4px; }
+.steps p { margin: 0; color: var(--color-text-secondary); font-size: 0.95rem; }
+/* No mobile o contador virava uma linha própria acima do título — lia como um
+   segundo título e custava ~34px de altura por card (9 cards na página). Aqui
+   ele vira um marcador na mesma linha do título, alinhado numa coluna fixa. */
+@media (max-width: 639px) {
+  .steps li { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; }
+  .steps li::before {
+    grid-column: 1; grid-row: 1; margin: 0; font-size: 1rem; line-height: 1.5;
+    align-self: start; color: var(--color-gold);
+  }
+  .steps strong { grid-column: 2; grid-row: 1; margin-bottom: 6px; }
+  .steps p { grid-column: 2; grid-row: 2; }
+}
+
+/* ---------- Sinais, seção 4: ilustrativos fixos, sempre marcados (não clicáveis) ---------- */
+.signals { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; align-items: stretch; }
+@media (min-width: 768px) { .signals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.signals li { margin: 0; }
+.signal {
+  position: relative; display: flex; gap: 12px; align-items: flex-start;
+  height: 100%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-wine-mid); border-radius: 14px;
+  box-shadow: inset 0 0 0 1px var(--color-wine-mid);
+  padding: 14px 16px;
+}
+/* barra lateral dourada — sempre visível (estado "marcado" fixo) */
+.signal::before {
+  content: ""; position: absolute; left: -1px; top: 12px; bottom: 12px; width: 4px;
+  border-radius: 4px; background: var(--color-gold);
+}
+.signal__box {
+  flex: none; width: 22px; height: 22px; margin-top: 2px;
+  border: 2px solid var(--color-wine-mid); border-radius: 6px;
+  background: var(--color-wine-mid); display: grid; place-items: center;
+}
+.signal__text { color: var(--color-ink); }
+
+/* ---------- Sobre / prova social ---------- */
+.about { display: grid; gap: 24px; }
+@media (min-width: 1024px) { .about { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; } }
+.logo-plaque {
+  display: inline-block; max-width: 100%;
+  background: var(--color-wine-deep);
+  border: 1px solid rgba(210, 169, 81, 0.45);
+  border-radius: 20px; padding: clamp(20px, 5vw, 28px) clamp(20px, 6vw, 32px);
+  box-shadow: 0 18px 44px rgba(36, 10, 11, 0.25);
+}
+.logo-plaque img { display: block; max-width: 220px; width: 100%; height: auto; }
+.credential { display: inline-block; background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: 999px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: var(--color-wine-mid); margin: 4px 6px 0 0; }
+/* Estado vazio das avaliacoes: empty-state estruturado, alinhado a esquerda.
+   Nao usar text-align:center aqui — p{max-width:68ch} centraliza dentro da
+   caixa de texto, nao do card, e o resultado parece desalinhado. */
+.reviews-empty {
+  display: grid; gap: 16px;
+  max-width: 760px; margin-top: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-gold);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(20px, 5vw, 30px) clamp(18px, 5vw, 32px);
+}
+@media (min-width: 640px) {
+  .reviews-empty { grid-template-columns: auto minmax(0, 1fr); gap: 20px; }
+}
+.reviews-empty__mark {
+  flex: none; width: 52px; height: 52px; border-radius: 14px;
+  display: grid; place-items: center;
+  background: rgba(210, 169, 81, 0.14);
+  border: 1px solid rgba(210, 169, 81, 0.45);
+  color: var(--color-wine-mid);
+}
+.reviews-empty__body { min-width: 0; }
+.reviews-empty__title {
+  font-size: 1.125rem; color: var(--color-ink); margin: 0 0 8px;
+}
+.reviews-empty__text {
+  color: var(--color-text-secondary); margin: 0 0 16px; max-width: 58ch;
+}
+.reviews-empty__rules {
+  list-style: none; padding: 0; margin: 0 0 16px;
+  display: grid; gap: 8px;
+  font-size: 0.95rem; color: var(--color-text-secondary);
+}
+.reviews-empty__rules li {
+  position: relative; padding-left: 22px; margin: 0;
+}
+.reviews-empty__rules li::before {
+  content: ""; position: absolute; left: 0; top: 0.6em;
+  width: 8px; height: 8px; border-radius: 999px;
+  background: var(--color-gold);
+}
+.reviews-empty__note {
+  margin: 0; padding-top: 14px; border-top: 1px solid var(--color-line);
+  font-size: 0.85rem; color: var(--color-text-muted); max-width: 62ch;
+}
+/* ---------- 11.3b Frosted Pearl Glass (só containers; nunca texto corrido) ----------
+   Regra após as bases sólidas (= fallback automático sem @supports).
+   Contraste preservado: texto ink sobre branco .82 efetivo >15:1. */
+.card, .checklist li, .steps li, .reviews-empty {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 12px; margin-top: 20px; }
+.faq details {
+  background: var(--color-surface); border: 1px solid var(--color-line);
+  border-radius: 14px; overflow: hidden;
+}
+.faq details[open] { border-color: var(--color-wine-mid); }
+.faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 18px; font-weight: 600; font-family: var(--font-display); font-size: 1rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .chev { flex: none; transition: transform 0.2s var(--ease-snap); color: var(--color-wine-mid); }
+.faq details[open] summary .chev { transform: rotate(180deg); }
+.faq .answer { padding: 0 18px 18px; color: var(--color-text-secondary); }
+.faq .answer p { margin: 0; }
+
+/* ---------- CTA final ----------
+   Padding fluido: 36/26px fixos com salto para 56/48px em 768 deixavam o card
+   espremido em 320-414px (so 220px uteis num viewport de 320) e criavam um
+   degrau visual no breakpoint. clamp() escala continuamente em toda a faixa.
+   overflow:hidden foi removido: cortava o outline dourado de foco (3px + 3px
+   de offset) dos inputs e botoes encostados na borda do card. O gradiente do
+   ::before passa a ser contido por border-radius:inherit. */
+.cta-final {
+  background: rgba(36, 10, 11, 0.86);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  color: var(--color-on-wine-soft);
+  border-radius: clamp(16px, 4vw, 24px);
+  padding: clamp(26px, 6vw, 56px) clamp(18px, 5vw, 48px);
+  text-align: center;
+  position: relative;
+  border: 1px solid rgba(210,169,81,0.3);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .cta-final { background: var(--color-wine-deep); }
+}
+.cta-final::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(500px 300px at 50% 0%, rgba(65,22,23,0.9), transparent 70%);
+}
+.cta-final h2 { color: #fff; position: relative; }
+.cta-final p { color: var(--color-on-wine-soft); margin-inline: auto; position: relative; }
+.cta-final__row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px; position: relative; }
+.cta-final h2, .cta-final p, .cta-final .hairline { max-width: 100%; }
+.phone-line { margin-top: 16px; font-weight: 600; position: relative; }
+.phone-line a { color: #fff; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--color-wine-deep); color: var(--color-on-wine-soft); padding: 40px 0 calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(210,169,81,0.25); }
+.site-footer a { color: #fff; }
+.site-footer__grid { display: grid; gap: 20px; }
+@media (min-width: 768px) { .site-footer__grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } }
+.site-footer h2 { color: #fff; font-size: 1.05rem; }
+/* Logo dourado direto sobre o vinho do rodapé (8.49:1) — dispensa placa. */
+.footer-logo { display: block; width: 100%; max-width: 140px; height: auto; margin: 0 0 14px; }
+.legal { font-size: 0.85rem; color: var(--color-on-wine-soft); }
+.footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.95rem; }
+
+/* ---------- WhatsApp flutuante + sticky mobile ---------- */
+.wa-float {
+  position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--color-wa-base); color: #fff;
+  display: grid; place-items: center; text-decoration: none;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+  transition: transform 0.2s var(--ease-snap), background-color 0.2s var(--ease-snap), filter 0.2s var(--ease-snap);
+}
+@media (min-width: 1024px) { .wa-float { width: 56px; height: 56px; right: 24px; bottom: 24px; } }
+.wa-float:hover { transform: translateY(-2px); background: var(--color-wa-base); filter: brightness(0.88); color: #fff; }
+.sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 65;
+  background: rgba(24, 8, 9, 0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(210,169,81,0.35);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  display: flex; gap: 10px; align-items: center;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .sticky-cta { background: var(--color-wine-deep); }
+}
+.sticky-cta .btn { flex: 1; min-height: 48px; }
+@media (min-width: 768px) { .sticky-cta { display: none; } }
+/* No mobile a barra .sticky-cta já fixa o mesmo CTA de WhatsApp no rodapé. O
+   botão flutuante era um segundo CTA idêntico que ficava por cima do corpo do
+   texto em praticamente todas as seções (cobria linhas inteiras nos 320-414px).
+   Fica só no ≥768px, onde a barra sticky não existe. */
+@media (max-width: 767px) {
+  .wa-float { display: none; }
+  body.has-sticky .section:last-of-type, body.has-sticky .site-footer { padding-bottom: 90px; }
+}
+
+/* ---------- Banner LGPD ---------- */
+.cookie-banner {
+  position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 80;
+  background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(36,10,11,0.22);
+  padding: 18px; display: none; gap: 14px;
+}
+.cookie-banner.is-visible { display: grid; }
+@media (min-width: 768px) {
+  .cookie-banner { left: auto; right: 24px; bottom: 24px; max-width: 420px; }
+  .cookie-banner.is-visible { display: block; }
+}
+.cookie-banner p { font-size: 0.9rem; color: var(--color-text-secondary); margin: 0 0 12px; }
+.cookie-banner__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cookie-banner__actions .btn { min-height: 44px; padding: 10px 16px; font-size: 0.92rem; }
+
+/* ---------- Formulário de contato (seção 11, paleta v2) ---------- */
+.cta-form { position: relative; width: 100%; max-width: 640px; margin: 26px auto 0; text-align: left; scroll-margin-top: 84px; }
+.cta-form__title { color: #fff; font-size: 1.1rem; margin-bottom: 6px; text-align: center; }
+.cta-form__sub { color: var(--color-on-wine-soft); font-size: 0.92rem; text-align: center; }
+/* Ritmo vertical explícito do form: 14px uniformes entre campos, status, botão
+   e nota — mesmo gap do .form-grid. Margens avulsas zeradas para não somar. */
+#contact-form { display: grid; gap: 14px; align-content: start; }
+/* auto-fit + min(100%, 230px): o form colapsa para 1 coluna pela largura REAL
+   disponivel dentro do card, nao pela largura da viewport. Com media query de
+   640px os campos ficavam com ~263px em telas de 640-767px, apertados dentro
+   do padding do .cta-final. min(100%,...) impede estouro em cards < 230px. */
+.form-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.form-field--full { grid-column: 1 / -1; }
+.form-field { display: grid; gap: 6px; min-width: 0; }
+.form-field label { color: var(--color-on-wine); font-weight: 600; font-size: 0.92rem; }
+.form-field label .req { color: var(--color-on-wine); }
+.form-field input, .form-field textarea {
+  width: 100%; max-width: 100%; min-height: 48px; padding: 12px 14px;
+  border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #fff; color: var(--color-ink);
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.5;
+}
+.form-field textarea { min-height: 110px; resize: vertical; } /* nunca resize:both — o arraste horizontal estoura o card */
+.form-field input:focus-visible, .form-field textarea:focus-visible { outline: 3px solid var(--color-gold); outline-offset: 2px; border-color: #fff; }
+.form-field [aria-invalid="true"] { border-color: #ff9d9d; box-shadow: 0 0 0 1px #ff9d9d; }
+.form-error { color: #ffc9c9; font-size: 0.85rem; margin: 0; }
+.form-error:empty { display: none; }
+/* Reserva fixa SÓ nos campos lado a lado (Nome/WhatsApp): a msg de erro real
+   tem ~60 caracteres e quebra em 2 linhas nas colunas — 2.6em (2 linhas a
+   1.3) mantém as colunas niveladas com ou sem erro. O campo full-width
+   (textarea) e o resto do form NÃO ganham reserva (vão anterior). */
+.form-field:not(.form-field--full) .form-error { min-height: 2.6em; line-height: 1.3; }
+.form-field:not(.form-field--full) .form-error:empty { display: block; }
+.form-status { border-radius: 12px; padding: 12px 16px; font-size: 0.95rem; margin: 0; text-align: left; }
+.form-status--error { background: rgba(255, 157, 157, 0.14); border: 1px solid #ff9d9d; color: #ffd9d9; }
+.form-status--success { background: rgba(106, 164, 66, 0.16); border: 1px solid var(--color-wa-brand); color: #d7f5e3; }
+.form-status[hidden] { display: none; }
+.form-privacy { color: var(--color-on-wine-soft); font-size: 0.82rem; text-align: center; margin: 0; }
+.cta-form noscript p { color: var(--color-on-wine-soft); text-align: center; }
+.cta-form noscript a { color: #fff; }
+
+/* ---------- Utilidades ---------- */
+.center { text-align: center; }
+.mt { margin-top: 24px; }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.to-top { margin-top: 18px; font-size: 0.9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

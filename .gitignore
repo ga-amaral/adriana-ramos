@@ -1,0 +1,17 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores / temporarios
+.vscode/
+*.swp
+*~
+*.bak
+
+# Logs e temporarios
+*.log
+*.tmp
+
+# Maestri — orquestracao interna (inclui screenshots de QA), nao vai pro repo publico
+.maestri/
