@@ -32,7 +32,7 @@ class P(HTMLParser):
         top, pos = self.stack.pop()
         if top != t: self.err.append("esperado </%s> (%s), veio </%s> (%s)" % (top, pos, t, self.getpos()))
 
-for f in ("index.html", "politica-de-privacidade.html"):
+for f in ("horas-extras-cargo-confianca.html", "politica-de-privacidade.html"):
     html = io.open(f, encoding="utf-8").read()
     p = P(); p.feed(html)
     ok("%s: HTML balanceado" % f, not p.stack and not p.err,
@@ -111,7 +111,7 @@ ok("todo grid multi-coluna usa minmax(0/min-content) ou auto-fit",
    not re.findall(r"grid-template-columns:\s*\d+fr \d+fr(?! )", css),
    str(re.findall(r"grid-template-columns:\s*\d+fr \d+fr(?! )", css)))
 
-for f in ("index.html", "politica-de-privacidade.html"):
+for f in ("horas-extras-cargo-confianca.html", "politica-de-privacidade.html"):
     html = io.open(f, encoding="utf-8").read()
     inline = re.findall(r'style="[^"]*"', html)
     ok("%s: sem style= inline de layout" % f, not inline, str(inline))

@@ -490,6 +490,13 @@ a:hover { color: var(--color-wine-deep); }
   margin: 0; padding-top: 14px; border-top: 1px solid var(--color-line);
   font-size: 0.85rem; color: var(--color-text-muted); max-width: 62ch;
 }
+/* ---------- Prova social real: nota agregada (só dados verificáveis) ----------
+   Estrelas decorativas (aria-hidden); a informação vai no número 4,9 + rótulo. */
+.rating { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0 0 12px; }
+.rating__score { font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--color-ink); }
+.stars { position: relative; display: inline-block; font-size: 1.35rem; letter-spacing: 2px; line-height: 1; color: var(--color-line); white-space: nowrap; }
+.stars__fg { position: absolute; inset: 0; overflow: hidden; width: 98%; color: var(--color-gold); white-space: nowrap; }
+.rating__count { font-weight: 600; font-size: 0.95rem; color: var(--color-text-secondary); }
 /* ---------- 11.3b Frosted Pearl Glass (só containers; nunca texto corrido) ----------
    Regra após as bases sólidas (= fallback automático sem @supports).
    Contraste preservado: texto ink sobre branco .82 efetivo >15:1. */

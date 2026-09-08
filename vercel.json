@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/horas-extras-cargo-confianca.html" },
+    { "source": "/horas-extras", "destination": "/horas-extras-cargo-confianca.html" },
+    { "source": "/burnout", "destination": "/burnout-metas-abusivas.html" },
+    { "source": "/gratificacao", "destination": "/gratificacao-funcao-bancario.html" },
+    { "source": "/politica-de-privacidade", "destination": "/politica-de-privacidade.html" }
+  ]
+}
