@@ -3,7 +3,7 @@
 **Nicho:** Descaracterização de falso cargo de confiança — Horas extras (7ª e 8ª horas)
 **Escritório:** Adriana Ramos Advocacia — Dra. Adriana Ramos, OAB/PA 16.347
 **Atendimento:** Online, todo o Brasil
-**WhatsApp:** (94) 98162-6806
+**WhatsApp:** (94) 98426-4945
 
 ---
 

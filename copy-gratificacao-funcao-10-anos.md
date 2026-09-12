@@ -3,7 +3,7 @@
 **Nicho:** Incorporação da gratificação de função ao salário — bancários que exerceram cargo/função de confiança por 10 anos ou mais
 **Escritório:** Adriana Ramos Advocacia — Dra. Adriana Ramos, OAB/PA 16.347
 **Atendimento:** Online, todo o Brasil
-**WhatsApp:** (94) 98162-6806
+**WhatsApp:** (94) 98426-4945
 
 ---
 

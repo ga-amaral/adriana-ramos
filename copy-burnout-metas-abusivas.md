@@ -3,7 +3,7 @@
 **Nicho:** Doença ocupacional — Síndrome de Burnout / ansiedade causada por pressão de metas abusivas no trabalho
 **Escritório:** Adriana Ramos Advocacia — Dra. Adriana Ramos, OAB/PA 16.347
 **Atendimento:** Online, todo o Brasil
-**WhatsApp:** (94) 98162-6806
+**WhatsApp:** (94) 98426-4945
 
 ---
 

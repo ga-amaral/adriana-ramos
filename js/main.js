@@ -12,8 +12,8 @@
   var DEFAULTS = {
     page: 'horas-extras',
     campanha: 'Horas Extras',
-    whatsappNumber: '5594981626806',
-    whatsappDisplay: '(94) 98162-6806',
+    whatsappNumber: '5594984264945',
+    whatsappDisplay: '(94) 98426-4945',
     defaultMessage:
       'Olá, Dra. Adriana! Li sobre horas extras (7ª e 8ª hora) para cargo de confiança em banco e gostaria de entender melhor a minha situação, com sigilo.',
     h1Default: 'a',
@@ -303,7 +303,7 @@
     if (q.required && !value) {
       message = 'Por favor, preencha este campo.';
     } else if (value && q.validate === 'phone' && !isValidPhone(value)) {
-      message = 'Informe um telefone válido com DDD, ex.: (94) 98162-6806.';
+      message = 'Informe um telefone válido com DDD, ex.: (94) 98426-4945.';
     }
     input.setAttribute('aria-invalid', message ? 'true' : 'false');
     if (err) err.textContent = message;
